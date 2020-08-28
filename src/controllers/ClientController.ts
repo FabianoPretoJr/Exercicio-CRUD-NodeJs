@@ -17,7 +17,7 @@ export default class ClientController {
                 age,
                 numberPhone,
             });
-            
+
             await trx.commit();
 
             return response.status(201).send();
@@ -29,4 +29,16 @@ export default class ClientController {
            });
        }
    }
+
+   async index(request: Request, response: Response) { 
+        const filterClient = request.query;
+
+        const name = filterClient.name as string;
+
+        const client = await db('client').where('client.name', '=', name);
+
+        return response.json(client);
+   }
+
+   
 }
