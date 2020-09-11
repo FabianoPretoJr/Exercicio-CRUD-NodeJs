@@ -40,5 +40,13 @@ export default class ClientController {
         return response.json(client);
    }
 
-   
+   async del(request: Request, response: Response) {
+        const filterDelete = request.query;
+
+        const name = filterDelete.name as string;
+
+        const clientDelete = await db('client').where('client.name', '=', name).del()
+
+        return response.json(clientDelete);
+   }
 }
