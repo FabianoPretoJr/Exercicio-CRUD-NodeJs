@@ -49,4 +49,15 @@ export default class ClientController {
 
         return response.json(clientDelete);
    }
+
+   async upd(request: Request, response: Response) {
+       const filterUpdate = request.query;
+       const { age, numberPhone } = request.body;
+
+       const name = filterUpdate.name as string;
+
+       const clientUpdate = await db('client').where('client.name', '=', name).update({ 'age': age, 'numberPhone': numberPhone });
+
+       return response.json(clientUpdate);
+   }
 }
